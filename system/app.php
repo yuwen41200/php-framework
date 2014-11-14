@@ -45,12 +45,61 @@ final class Application {
 		}
 	}
 
-	public static function run(){
+	public static function routeToController($url_array) {
+		$app = NULL;
+		$controller = NULL;
+		$model = NULL;
+		$action = NULL;
+		$params = NULL;
+		if (isset($url_array['app']))
+			$app = $url_array['app'];
+		if (isset($url_array['controller']))
+			$controller = $model = $url_array['controller'];
+		else
+			$controller = $model = self::$_config['route_default_controller'];
+		if ($app) {
+			$controller_file = _CONTROLLER_PATH.'/'.$app.'/'.$controller.'Controller.php';
+			$model_file = _MODEL_PATH.'/'.$app.'/'.$model.'Model.php';
+		} else {
+			$controller_file = _CONTROLLER_PATH.'/'.$controller.'Controller.php';
+			$model_file = _MODEL_PATH.'/'.$model.'Model.php';
+		}
+		if (isset($url_array['action']))
+			$action = $url_array['action'];
+		else
+			$action = self::$_config['route_default_action'];
+		if (isset($url_array['params']))
+			$params = $url_array['params'];
+		if (file_exists($controller_file)) {
+			require_once $controller_file;
+			if (file_exists($model_file))
+				require_once $model_file;
+			$controller .= 'Controller';
+			$controller = new $controller;
+			if (method_exists($controller, $action))
+				$params ? $controller -> $action($params) : $controller -> $action();
+		}
+	}
+
+	public static function run() {
 		self::init();
 		self::load();
 		self::$_lib['route'] -> setUrlType(self::$_config['route_url_type']);
 		$url_array = self::$_lib['route'] -> getUrlArray();
 		self::routeToController($url_array);
+	}
+
+	public static function loadCustomLib($load_class) {
+		$lib_file = _LIB_PATH.'/'.self::$_config['lib_prefix'].'_'.$load_class.'.php';
+		if (file_exists($lib_file)) {
+			require_once $lib_file;
+			$load_class = ucfirst(self::$_config['lib_prefix']).ucfirst($load_class);
+			return new $load_class;
+		} else {
+			$lib_file = _SYS_LIB_PATH.'/lib_'.$load_class.'.php';
+			require_once $lib_file;
+			return self::$_lib[$load_class] = new ucfirst($load_class);
+		}
 	}
 }
 
