@@ -39,7 +39,7 @@ final class Template {
          * @access      public  
          * @return      string
          */
-        public function outPut(){
+        public function output(){
                 echo $this->out_put;
         }
         /**

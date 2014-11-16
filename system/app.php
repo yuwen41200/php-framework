@@ -12,7 +12,6 @@ define('_SYS_CORE_PATH', _SYS_PATH.'/core');
 define('_SYS_LIB_PATH', _SYS_PATH.'/lib');
 define('_USE_CONFIG_FILE', _CONFIG_PATH.'/default.php');
 
-
 final class Application {
 	public static $_config = NULL;
 	public static $_lib = NULL;
