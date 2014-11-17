@@ -32,7 +32,8 @@ final class Application {
 	public static function load() {
 		foreach (self::$_lib as $key => $value) {
 			require_once self::$_lib[$key];
-			self::$_lib[$key] = new ucfirst($key);
+			$u_key = ucfirst($key);
+			self::$_lib[$key] = new $u_key;
 		}
 		if (is_object(self::$_lib['cache'])) {
 			self::$_lib['cache'] -> init(
@@ -97,7 +98,8 @@ final class Application {
 		} else {
 			$lib_file = _SYS_LIB_PATH.'/lib_'.$load_class.'.php';
 			require_once $lib_file;
-			return self::$_lib[$load_class] = new ucfirst($load_class);
+			$u_load_class = ucfirst($load_class);
+			return self::$_lib[$load_class] = new $u_load_class;
 		}
 	}
 }

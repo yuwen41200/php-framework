@@ -12,7 +12,7 @@ return array(
 
 	'lib_prefix' => 'ext',
 
-	'route_default_controller' => 'home',
+	'route_default_controller' => 'main',
 	'route_default_action' => 'index',
 	'route_url_type' => 1,
 	# for value 1, it will be 'index.php?controller=m&action=n&id=k'
