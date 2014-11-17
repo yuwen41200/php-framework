@@ -6,7 +6,7 @@
  * @author      yuansir <yuansir@live.cn/yuansir-web.com>
  * @version     1.0
  */
-class download {
+class Download {
 
         var $debug = true;
         var $errormsg = '';

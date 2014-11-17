@@ -7,12 +7,24 @@ class mainController extends Controller {
 
 	public function index() {
 		echo "Debug message: action 'index' in controller 'mainController'<br>\n";
-		/*$object = $this -> load('download', FALSE);
-		var_dump($object);
-		exit();*/
-		/*$object->set_byfile('http://localhost/framework/error/2011-12-28_SQL.txt');//服务器文件名,包括路径
-		$object->filename = "2011-12-28_SQL.txt";//下载另存为的文件名
-		$object->download();*/
+		echo "Info: try other available actions 'testDatabases', 'testSample', 'testHome'<br>\n";
+	}
+
+	public function testDatabases() {
+		$mod = $this -> model('main');
+		$result = $mod -> show();
+		var_dump($result);
+	}
+
+	public function testSample() {
+		$obj = $this -> lib('sample', FALSE);
+		$obj -> sampleRun();
+	}
+
+	public function testHome() {
+		$data['article_1'] = "Debug message: print 'article_1'<br>\n";
+		$data['article_2'] = "Debug message: print 'article_2'<br>\n";
+		$this -> template('home', $data);
 	}
 }
 

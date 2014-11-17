@@ -22,7 +22,7 @@ final class Template {
          * @param       string  $file
          */
         public function fetch() {
-                $view_file = VIEW_PATH . '/' . $this->template_name . '.php';
+                $view_file = _VIEW_PATH . '/' . $this->template_name . '.php';
                 if (file_exists($view_file)) {
                         extract($this->data);
                         ob_start();
