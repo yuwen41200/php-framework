@@ -3,4 +3,4 @@
 Basic PHP MVC Framework  
 -> [Demo][demo_link]
 
-[demo_link]: http://people.nctu.edu.tw/~ywpu/php-framework/
+[demo_link]: http://people.cs.nctu.edu.tw/~ywpu/php-framework/
