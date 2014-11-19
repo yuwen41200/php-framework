@@ -1,90 +1,69 @@
 <?php
-/**
- * URL处理类
- * @copyright   Copyright(c) 2011
- * @author      yuansir <yuansir@live.cn/yuansir-web.com>
- * @version     1.0
- */
-final class Route{
-        public $url_query;
-        public $url_type;
-        public $route_url = array();
 
+final class Route {
+	public $url_type = NULL;
+	public $url_array = array();
 
-        public function __construct() {
-                $this->url_query = parse_url($_SERVER['REQUEST_URI']);      
-        }
-        /**
-         * 设置URL类型
-         * @access      public
-         */
-        public function setUrlType($url_type = 2){
-                if($url_type > 0 && $url_type <3){
-                        $this->url_type = $url_type;
-                }else{
-                        trigger_error("指定的URL模式不存在！");
-                }
-        }
+	public function setUrlType($url_type) {
+		switch ($url_type) {
+			case 1:
+				$this -> url_type = 1;
+				break;
+			case 2:
+				$this -> url_type = 2;
+				break;
+			default:
+				$this -> url_type = 1;
+				break;
+		}
+	}
 
-        /**
-         * 获取数组形式的URL  
-         * @access      public
-         */
-        public function getUrlArray(){
-                $this->makeUrl();
-                return $this->route_url;
-        }
-        /**
-         * @access      public
-         */
-        public function makeUrl(){
-                switch ($this->url_type){
-                        case 1:
-                                $this->querytToArray();
-                                break;
-                        case 2:
-                                $this->pathinfoToArray();
-                                break;
-                }
-        }
-        /**
-         * 将query形式的URL转化成数组
-         * @access      public
-         */
-        public function querytToArray(){
-                $arr = !empty ($this->url_query['query']) ?explode('&', $this->url_query['query']) :array();
-                $array = $tmp = array();
-                if (count($arr) > 0) {
-                        foreach ($arr as $item) {
-                                $tmp = explode('=', $item);
-                                $array[$tmp[0]] = $tmp[1];
-                        }
-                        if (isset($array['app'])) {
-                                $this->route_url['app'] = $array['app'];
-                                unset($array['app']);
-                        } 
-                        if (isset($array['controller'])) {
-                                $this->route_url['controller'] = $array['controller'];
-                                unset($array['controller']);
-                        } 
-                        if (isset($array['action'])) {
-                                $this->route_url['action'] = $array['action'];
-                                unset($array['action']);
-                        }
-                        if(count($array) > 0){
-                                $this->route_url['params'] = $array;
-                        }
-                }else{
-                        $this->route_url = array();
-                }   
-        }
-        /**
-         * 将PATH_INFO的URL形式转化为数组
-         * @access      public
-         */
-        public function pathinfoToArray(){
-                
-        }
+	public function getUrlArray() {
+		switch ($this -> url_type) {
+			case 1:
+				$this -> querytToArray();
+				break;
+			case 2:
+				$this -> pathinfoToArray();
+				break;
+		}
+		return $this -> url_array;
+	}
+
+	private function querytToArray() {
+		parse_str($_SERVER['QUERY_STRING'], $url_query);
+		$this -> processUrlArray($url_query);
+	}
+
+	private function pathinfoToArray() {
+		$url_pathinfo_exploded = explode('/', $_SERVER['PATH_INFO']);
+		array_shift($url_pathinfo_exploded);
+		foreach ($url_pathinfo_exploded as $key => $value) {
+			if ($key % 2)
+				break;
+			else
+				$url_pathinfo[$value] = $url_pathinfo_exploded[++$key];
+		}
+		$this -> processUrlArray($url_pathinfo);
+	}
+
+	private function processUrlArray($url_process) {
+		if (isset($url_process['app'])) {
+			$this -> url_array['app'] = $url_process['app'];
+			unset($url_process['app']);
+		} 
+		if (isset($url_process['controller'])) {
+			$this -> url_array['controller'] = $url_process['controller'];
+			unset($url_process['controller']);
+		}
+		if (isset($url_process['action'])) {
+			$this -> url_array['action'] = $url_process['action'];
+			unset($url_process['action']);
+		}
+		if (count($url_process) > 0) {
+			$this -> url_array['params'] = $url_process;
+		}
+	}
 }
 
-
+?>

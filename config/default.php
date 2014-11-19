@@ -15,9 +15,9 @@ return array(
 
 	'route_default_controller' => 'main',
 	'route_default_action' => 'index',
-	'route_url_type' => 1,
+	'route_url_type' => 2,
 	# for value 1, it will be 'index.php?controller=m&action=n&id=k'
-	# for value 2, it will be 'index.php/m/n/id/k'
+	# for value 2, it will be 'index/controller/m/action/n/id/k'
 
 	'cache_dir' => 'cache',
 	'cache_prefix' => 'cache_',

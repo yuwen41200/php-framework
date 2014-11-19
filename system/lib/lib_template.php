@@ -11,7 +11,7 @@ final class Template {
 		$this -> result = $this -> fetchContents();
 	}
 
-	public function fetchContents() {
+	private function fetchContents() {
 		$view_file = _VIEW_PATH.'/'.$this -> view.'.php';
 		if (file_exists($view_file)) {
 			extract($this -> data);
