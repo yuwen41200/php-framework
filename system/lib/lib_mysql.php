@@ -58,7 +58,7 @@ final class Mysql {
 
 	public function changeDatabase($new_db) {
 		$this -> conn -> select_db($new_db) or die('MySQL Error: '.$this -> conn -> error);
-		$tihs -> db = new_db;
+		$tihs -> db = $new_db;
 	}
 
 	public function select($column, $table, $condition = NULL, $limitation = NULL, $order = NULL) {
