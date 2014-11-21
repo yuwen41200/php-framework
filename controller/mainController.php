@@ -12,8 +12,8 @@ class mainController extends Controller {
 
 	public function testDatabases() {
 		$mod = $this -> model('main');
-		$result = $mod -> show();
-		var_dump($result);
+		$mod -> testing();
+		$mod -> show();
 	}
 
 	public function testSample() {

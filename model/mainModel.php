@@ -6,7 +6,7 @@ class mainModel extends Model {
 	}
 	
 	function show() {
-		$this -> db -> show_databases();
+		$this -> db -> showDatabases();
 	}
 }
 

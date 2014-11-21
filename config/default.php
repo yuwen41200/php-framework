@@ -8,17 +8,14 @@ return array(
 	'db_database' => 'ywpu_cs',
 	'db_table_prefix' => 'web_',
 	'db_charset' => 'utf8mb4_general_ci',
-	'db_conn' => '',
-	# set the value to 'pconn' for persistent connection
-
+	'db_conn_type' => '',
+	# set the value to 'p:' for persistent connection
 	'lib_prefix' => 'ext',
-
 	'route_default_controller' => 'main',
 	'route_default_action' => 'index',
 	'route_url_type' => 2,
 	# for value 1, it will be 'index.php?controller=m&action=n&id=k'
 	# for value 2, it will be 'index/controller/m/action/n/id/k'
-
 	'cache_dir' => 'cache',
 	'cache_prefix' => 'cache_',
 	'cache_time' => 1800,

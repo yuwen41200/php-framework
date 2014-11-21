@@ -19,11 +19,10 @@ final class Application {
 	public static function init() {
 		self::$_config = require_once _USE_CONFIG_FILE;
 		self::$_lib = array(
-			'route' => _SYS_LIB_PATH.'/lib_route.php',
-			'mysql'=> _SYS_LIB_PATH.'/lib_mysql.php',
-			'template' => _SYS_LIB_PATH.'/lib_template.php',
 			'cache' => _SYS_LIB_PATH.'/lib_cache.php',
-			'thumbnail' => _SYS_LIB_PATH.'/lib_thumbnail.php'
+			'mysql'=> _SYS_LIB_PATH.'/lib_mysql.php',
+			'route' => _SYS_LIB_PATH.'/lib_route.php',
+			'template' => _SYS_LIB_PATH.'/lib_template.php'
 		);
 		require_once _SYS_CORE_PATH.'/model.php';
 		require_once _SYS_CORE_PATH.'/controller.php';

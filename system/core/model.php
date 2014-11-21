@@ -11,7 +11,7 @@ class Model {
 			$this -> config('db_user'),
 			$this -> config('db_password'),
 			$this -> config('db_database'),
-			$this -> config('db_conn'),
+			$this -> config('db_conn_type'),
 			$this -> config('db_charset')
 		);
 	}
