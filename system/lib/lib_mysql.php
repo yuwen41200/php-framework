@@ -33,32 +33,65 @@ final class Mysql {
 
 	public function showDatabases() {
 		$result = $this -> conn -> query("SHOW DATABASES") or die('MySQL Error: '.$this -> conn -> error);
-		echo "All databases on the MySQL server:<br>\n";
+		$output = "<table><tr><td colspan='2'>All databases on the MySQL server</td></tr>\n";
 		$count = 1;
 		while ($row = $result -> fetch_assoc()) {
-			echo "($count) $row[Database]<br>\n";
+			$output .= "<tr><td>($count)</td>";
+			$output .= "<td>$row[Database]</td></tr>\n";
 			$count++;
 		}
-		echo "Total databases: $result->num_rows<br>\n";
+		$output .= "<tr><td colspan='2'>Total databases: $result->num_rows</td></tr></table>\n";
 		$result -> free();
+		return $output;
 	}
 
 	public function showTables() {
 		$result = $this -> conn -> query("SHOW TABLES") or die('MySQL Error: '.$this -> conn -> error);
-		echo "All tables in database '$this->db'<br>\n";
+		$output = "<table><tr><td colspan='2'>All tables in database '$this->db'</td></tr>\n";
 		$count = 1;
 		$column = "Tables_in_$this->db";
 		while ($row = $result -> fetch_assoc()) {
-			echo "($count) $row[$column]<br>\n";
+			$output .= "<tr><td>($count)</td>";
+			$output .= "<td>$row[$column]</td></tr>\n";
 			$count++;
 		}
-		echo "Total tables: $result->num_rows<br>\n";
+		$output .= "<tr><td colspan='2'>Total tables: $result->num_rows</td></tr></table>\n";
 		$result -> free();
+		return $output;
 	}
 
-	public function changeDatabase($new_db) {
+	public function selectDatabase($new_db) {
 		$this -> conn -> select_db($new_db) or die('MySQL Error: '.$this -> conn -> error);
 		$tihs -> db = $new_db;
+	}
+
+	public function describeTable($table) {
+		$query = "SHOW FULL COLUMNS FROM $table";
+		$result = $this -> conn -> query($query) or die('MySQL Error: '.$this -> conn -> error);
+		$output = "<table><tr><td colspan='9'>Descriptions of table '$table'</td></tr>\n";
+		$output .= "<tr><td>Field</td>";
+		$output .= "<td>Type</td>";
+		$output .= "<td>Collation</td>";
+		$output .= "<td>Null</td>";
+		$output .= "<td>Key</td>";
+		$output .= "<td>Default</td>";
+		$output .= "<td>Extra</td>";
+		$output .= "<td>Privileges</td>";
+		$output .= "<td>Comment</td></tr>\n";
+		while ($row = $result -> fetch_assoc()) {
+			$output .= "<tr><td>$row[Field]</td>";
+			$output .= "<td>$row[Type]</td>";
+			$output .= "<td>$row[Collation]</td>";
+			$output .= "<td>$row[Null]</td>";
+			$output .= "<td>$row[Key]</td>";
+			$output .= "<td>$row[Default]</td>";
+			$output .= "<td>$row[Extra]</td>";
+			$output .= "<td>$row[Privileges]</td>";
+			$output .= "<td>$row[Comment]</td></tr>\n";
+		}
+		$output .= "<tr><td colspan='9'>Total columns: $result->num_rows</td></tr></table>\n";
+		$result -> free();
+		return $output;
 	}
 
 	public function select($column, $table, $condition = NULL, $limitation = NULL, $order = NULL) {
@@ -69,7 +102,8 @@ final class Mysql {
 			$query .= " LIMIT $limitation";
 		if ($order)
 			$query .= " ORDER BY $order";
-		$this -> conn -> query($query) or die('MySQL Error: '.$this -> conn -> error);
+		$result = $this -> conn -> query($query) or die('MySQL Error: '.$this -> conn -> error);
+		return $result;
 	}
 
 	public function delete($table, $condition, $safe = TRUE) {
@@ -88,6 +122,10 @@ final class Mysql {
 		$query = "UPDATE $table SET $modification WHERE $condition";
 		if ($safe)
 			$query .= " LIMIT 1";
+		$this -> conn -> query($query) or die('MySQL Error: '.$this -> conn -> error);
+	}
+
+	public function query($query) {
 		$this -> conn -> query($query) or die('MySQL Error: '.$this -> conn -> error);
 	}
 

@@ -39,10 +39,8 @@ final class Route {
 		$url_pathinfo_exploded = explode('/', $_SERVER['PATH_INFO']);
 		array_shift($url_pathinfo_exploded);
 		foreach ($url_pathinfo_exploded as $key => $value) {
-			if ($key % 2)
-				break;
-			else
-				$url_pathinfo[$value] = $url_pathinfo_exploded[++$key];
+			if (!($key%2))
+				$url_pathinfo[$value] = $url_pathinfo_exploded[$key+1];
 		}
 		$this -> processUrlArray($url_pathinfo);
 	}
