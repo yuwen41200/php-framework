@@ -20,7 +20,7 @@ return array(
 	'cache_prefix' => 'cache_',
 	'cache_time' => 1800,
 	'cache_mode' => 2
-	# for value 1, it will serialize; for value 2, it will save as exacutable files
+	# for value 1, it will be serialized; for value 2, it will be saved as exacutable files
 );
 
 ?>

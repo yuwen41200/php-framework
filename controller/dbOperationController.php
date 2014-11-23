@@ -9,6 +9,8 @@ class dbOperationController extends Controller {
 
 	public function index() {
 		$mod = $this -> model('dbOperation');
+		echo "Debug message: action 'index' in controller 'dbOperationController'<br>\n";
+		echo "Info: try other available actions 'insert'<br>\n";
 		echo "<h3>Info: calling dbOperationModel::createTable()</h3>\n";
 		$mod -> createTable($this -> table);
 		echo "<h3>Info: calling dbOperationModel::listTables()</h3>\n";
@@ -17,8 +19,6 @@ class dbOperationController extends Controller {
 		$mod -> verifyTable($this -> table);
 		echo "<h3>Info: calling dbOperationModel::listRows()</h3>\n";
 		$mod -> listRows($this -> table);
-		echo "Debug message: action 'index' in controller 'dbOperationController'<br>\n";
-		echo "Info: try other available actions 'insert'<br>\n";
 	}
 
 	public function insert($params = array('content' => 'VALUE_UNSPECIFIED')) {

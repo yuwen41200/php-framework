@@ -2,7 +2,7 @@
 
 class dbOperationModel extends Model {
 	function createTable($table) {
-		$table_name = $this -> config('db_table_prefix') . $table;
+		$table_name = $this -> table($table);
 		$this -> db -> query(<<<SYNTAX
 CREATE TABLE IF NOT EXISTS $table_name (
 	id INT(20) NOT NULL AUTO_INCREMENT,
@@ -21,14 +21,14 @@ SYNTAX
 	}
 
 	function verifyTable($table) {
-		$table_name = $this -> config('db_table_prefix') . $table;
+		$table_name = $this -> table($table);
 		$result = $this -> db -> describeTable($table_name);
 		echo $result;
 	}
 
 	function listRows($table) {
 		$column = '*';
-		$table_name = $this -> config('db_table_prefix') . $table;
+		$table_name = $this -> table($table);
 		$order = 'id ASC';
 		$result = $this -> db -> select($column, $table_name, NULL, NULL, $order);
 		$date = "date";
@@ -46,7 +46,7 @@ SYNTAX
 	}
 
 	function insertRow($table, $params) {
-		$table_name = $this -> config('db_table_prefix') . $table;
+		$table_name = $this -> table($table);
 		$column = 'content';
 		$params = $this -> db -> checkValues($params);
 		$value = $params['content'];

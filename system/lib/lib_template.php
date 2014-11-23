@@ -5,9 +5,9 @@ final class Template {
 	public $data = array();
 	public $result = NULL;
 	
-	public function init($view, $data) {
-		$this -> view = $view;
-		$this -> data = $data;
+	public function init($_view, $_data) {
+		$this -> view = $_view;
+		$this -> data = $_data;
 		$this -> result = $this -> fetchContents();
 	}
 

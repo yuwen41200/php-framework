@@ -8,7 +8,7 @@ class mainController extends Controller {
 	public function index() {
 		echo "Debug message: action 'index' in controller 'mainController'<br>\n";
 		echo "Info: try other available actions 'testDatabases', 'testSample', 'testHome'<br>\n";
-		echo "Info: or try other available controllers 'dbOperation'<br>\n";
+		echo "Info: or try other available controllers 'dbOperation', 'mainController' in app 'simple_cache_test'<br>\n";
 	}
 
 	public function testDatabases() {

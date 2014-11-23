@@ -2,6 +2,7 @@
 
 class Model {
 	protected $db = NULL;
+	protected $cache = NULL;
 
 	final public function __construct() {
 		header('Content-type: text/html; chartset=utf-8');
@@ -14,11 +15,11 @@ class Model {
 			$this -> config('db_conn_type'),
 			$this -> config('db_charset')
 		);
+		$this -> cache = $this -> lib('cache');
 	}
 
 	final protected function table($table) {
-		$table .= $this -> config('db_table_prefix');
-		return $table;
+		return $this -> config('db_table_prefix') . $table;
 	}
 
 	final protected function lib($lib, $is_system_lib = TRUE) {
