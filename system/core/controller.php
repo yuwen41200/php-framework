@@ -1,6 +1,6 @@
 <?php
 
-class Controller {
+abstract class Controller {
 	public function __construct() {
 		header('Content-type: text/html; chartset=utf-8');
 	}
