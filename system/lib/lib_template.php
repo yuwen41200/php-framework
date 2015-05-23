@@ -1,6 +1,7 @@
 <?php
 
 final class Template {
+
 	public $view = NULL;
 	public $data = array();
 	public $result = NULL;
@@ -26,6 +27,7 @@ final class Template {
 	public function output() {
 		echo $this -> result;
 	}
+
 }
 
 ?>

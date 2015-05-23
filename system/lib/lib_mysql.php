@@ -1,6 +1,7 @@
 <?php
 
 final class Mysql {
+
 	private $host = NULL;
 	private $usr = NULL;
 	private $pwd = NULL;
@@ -133,10 +134,11 @@ final class Mysql {
 		foreach ($value_array as $key => $value) {
 			$value_array[$key] = htmlentities($value_array[$key], ENT_QUOTES, 'UTF-8');
 			$value_array[$key] = $this -> conn -> real_escape_string($value_array[$key]);
-			$value_array[$key] = ($value_array[$key] == "") ? "NULL" : "'$value'";
+			$value_array[$key] = ($value_array[$key] == "") ? "NULL" : "'$value_array[$key]'";
 		}
 		return $value_array;
 	}
+
 }
 
 ?>

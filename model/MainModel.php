@@ -1,14 +1,16 @@
 <?php
 
-class mainModel extends Model {
+class MainModel extends Model {
+
 	function testing() {
-		echo "Debug message: mainModel::testing() called<br>\n";
+		echo "Debug message: MainModel::testing() called<br>\n";
 	}
 	
 	function show() {
 		$result = $this -> db -> showDatabases();
 		echo $result;
 	}
+
 }
 
 ?>

@@ -1,6 +1,7 @@
 <?php
 
 final class Cache {
+
 	private $dir = NULL;
 	private $prefix = NULL;
 	private $time = NULL;
@@ -82,6 +83,7 @@ final class Cache {
 			return include $path;
 		}
 	}
+
 }
 
 ?>

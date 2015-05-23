@@ -13,6 +13,7 @@ define('_SYS_LIB_PATH', _SYS_PATH.'/lib');
 define('_USE_CONFIG_FILE', _CONFIG_PATH.'/default.php');
 
 final class Application {
+
 	public static $_config = NULL;
 	public static $_lib = NULL;
 
@@ -52,8 +53,8 @@ final class Application {
 		$params = NULL;
 		if (isset($url_array['app']))
 			$app = $url_array['app'];
-		if (isset($url_array['controller']))
-			$controller = $model = $url_array['controller'];
+		if (isset($url_array['ctl']))
+			$controller = $model = $url_array['ctl'];
 		else
 			$controller = $model = self::$_config['route_default_controller'];
 		if ($app) {
@@ -63,8 +64,8 @@ final class Application {
 			$controller_file = _CONTROLLER_PATH.'/'.$controller.'Controller.php';
 			$model_file = _MODEL_PATH.'/'.$model.'Model.php';
 		}
-		if (isset($url_array['action']))
-			$action = $url_array['action'];
+		if (isset($url_array['act']))
+			$action = $url_array['act'];
 		else
 			$action = self::$_config['route_default_action'];
 		if (isset($url_array['params']))
@@ -101,6 +102,7 @@ final class Application {
 			return self::$_lib[$load_class] = new $u_load_class;
 		}
 	}
+
 }
 
 ?>

@@ -1,6 +1,7 @@
 <?php
 
-class dbOperationModel extends Model {
+class DatabaseModel extends Model {
+
 	function createTable($table) {
 		$table_name = $this -> table($table);
 		$this -> db -> query(<<<SYNTAX
@@ -51,10 +52,11 @@ SYNTAX
 		$params = $this -> db -> checkValues($params);
 		$value = $params['content'];
 		$this -> db -> insert($table_name, $column, $value);
-		header("Refresh: 5; url=http://people.cs.nctu.edu.tw/~ywpu/php-framework/index/controller/dbOperation");
+		header("Refresh: 5; url=http://people.cs.nctu.edu.tw/~ywpu/php-framework/index/ctl/Database");
 		echo "Debug message: row inserted successfully<br>\n";
 		exit;
 	}
+
 }
 
 ?>

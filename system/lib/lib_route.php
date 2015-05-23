@@ -1,6 +1,7 @@
 <?php
 
 final class Route {
+
 	public $url_type = NULL;
 	public $url_array = array();
 
@@ -50,18 +51,19 @@ final class Route {
 			$this -> url_array['app'] = $url_process['app'];
 			unset($url_process['app']);
 		} 
-		if (isset($url_process['controller'])) {
-			$this -> url_array['controller'] = $url_process['controller'];
-			unset($url_process['controller']);
+		if (isset($url_process['ctl'])) {
+			$this -> url_array['ctl'] = $url_process['ctl'];
+			unset($url_process['ctl']);
 		}
-		if (isset($url_process['action'])) {
-			$this -> url_array['action'] = $url_process['action'];
-			unset($url_process['action']);
+		if (isset($url_process['act'])) {
+			$this -> url_array['act'] = $url_process['act'];
+			unset($url_process['act']);
 		}
 		if (count($url_process) > 0) {
 			$this -> url_array['params'] = $url_process;
 		}
 	}
+
 }
 
 ?>

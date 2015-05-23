@@ -1,18 +1,15 @@
 <?php
 
-class mainController extends Controller {
-	public function __construct() {
-		parent::__construct();
-	}
+class MainController extends Controller {
 
 	public function index() {
-		echo "Debug message: action 'index' in controller 'main'<br>\n";
+		echo "Debug message: action 'index' in controller 'Main'<br>\n";
 		echo "Info: try other available actions 'testDatabases', 'testSample', 'testHome'<br>\n";
-		echo "Info: or try other available controllers 'dbOperation', 'main' in app 'simple_cache_test'<br>\n";
+		echo "Info: or try other available controllers 'Database', 'Main' in app 'simple_cache'<br>\n";
 	}
 
 	public function testDatabases() {
-		$mod = $this -> model('main');
+		$mod = $this -> model('Main');
 		$mod -> testing();
 		$mod -> show();
 	}
@@ -25,8 +22,9 @@ class mainController extends Controller {
 	public function testHome() {
 		$data['article_1'] = "Debug message: print 'article_1'<br>\n";
 		$data['article_2'] = "Debug message: print 'article_2'<br>\n";
-		$this -> template('home', $data);
+		$this -> template('main', $data);
 	}
+
 }
 
 ?>

@@ -1,6 +1,7 @@
 <?php
 
-class mainModel extends Model {
+class MainModel extends Model {
+
 	function add($content = 'VALUE_UNSPECIFIED') {
 		$this -> cache -> push('example', $content);
 	}
@@ -12,6 +13,7 @@ class mainModel extends Model {
 	function clear() {
 		$this -> cache -> flush();
 	}
+
 }
 
 ?>
