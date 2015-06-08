@@ -1,8 +1,8 @@
-# php-framework
+# PHP Framework #
 Basic PHP MVC Framework  
 [http://people.cs.nctu.edu.tw/~ywpu/php-framework/][link]
 
-##### Instructions
+## Instructions ##
 The following files are just usage examples  
 and should be modified or removed before use:
 
