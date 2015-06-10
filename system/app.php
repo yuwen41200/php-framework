@@ -11,6 +11,7 @@ define('_LOG_PATH', _ROOT_PATH.'/log');
 define('_SYS_CORE_PATH', _SYS_PATH.'/core');
 define('_SYS_LIB_PATH', _SYS_PATH.'/lib');
 define('_USE_CONFIG_FILE', _CONFIG_PATH.'/default.php');
+define('_APP_VERSION', 'v2.0');
 
 final class Application {
 
