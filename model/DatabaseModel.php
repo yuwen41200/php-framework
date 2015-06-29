@@ -7,7 +7,7 @@ class DatabaseModel extends Model {
 		$this -> db -> query(<<<SYNTAX
 CREATE TABLE IF NOT EXISTS $table_name (
 	id INT(20) NOT NULL AUTO_INCREMENT,
-	content VARCHAR(20) NOT NULL,
+	content VARCHAR(255) NOT NULL,
 	time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	PRIMARY KEY (id)
 ) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci
@@ -40,7 +40,7 @@ SYNTAX
 		while ($row = $result -> fetch_assoc()) {
 			echo "<tr><td>$row[id]</td>";
 			echo "<td>$row[content]</td>";
-			echo "<td>{$date('M j Y g:i A', strtotime($row[time]))}</td></tr>\n";
+			echo "<td>{$date('M j Y g:i A', strtotime($row['time']))}</td></tr>\n";
 		}
 		echo "<tr><td colspan='3'>Total rows: $result->num_rows</td></tr></table>\n";
 		$result -> free();

@@ -39,12 +39,12 @@ final class Route {
 	}
 
 	private function pathinfoToArray() {
-		if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO']!='') {
+		if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO']!='' && $_SERVER['PATH_INFO']!='/') {
 			$url_pathinfo_exploded = explode('/', $_SERVER['PATH_INFO']);
 			array_shift($url_pathinfo_exploded);
 			foreach ($url_pathinfo_exploded as $key => $value)
 				if (!($key%2) && $value!='')
-					$url_pathinfo[$value] = $url_pathinfo_exploded[$key+1];
+					$url_pathinfo[$value] = array_key_exists($key+1, $url_pathinfo_exploded) ? $url_pathinfo_exploded[$key+1] : '';
 			$this -> processUrlArray($url_pathinfo);
 		}
 	}

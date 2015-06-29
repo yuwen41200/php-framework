@@ -8,13 +8,13 @@ class DatabaseController extends Controller {
 		$mod = $this -> model('database');
 		echo "Debug message: action 'index' in controller 'database'<br>\n";
 		echo "Info: try other available actions 'insert'<br>\n";
-		echo "<i>Info: calling DatabaseModel::createTable()</i>\n";
+		echo "<h1>Info: calling DatabaseModel::createTable()</h1>\n";
 		$mod -> createTable($this -> table);
-		echo "<i>Info: calling DatabaseModel::listTables()</i>\n";
+		echo "<h1>Info: calling DatabaseModel::listTables()</h1>\n";
 		$mod -> listTables();
-		echo "<i>Info: calling DatabaseModel::verifyTable()</i>\n";
+		echo "<h1>Info: calling DatabaseModel::verifyTable()</h1>\n";
 		$mod -> verifyTable($this -> table);
-		echo "<i>Info: calling DatabaseModel::listRows()</i>\n";
+		echo "<h1>Info: calling DatabaseModel::listRows()</h1>\n";
 		$mod -> listRows($this -> table);
 	}
 

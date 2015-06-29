@@ -60,7 +60,7 @@ final class Cache {
 			$data = serialize($data);
 		else
 			$data = "<?php\nreturn ".var_export($data, TRUE).";\n?>\n";
-		$file = fopen($path, w);
+		$file = fopen($path, 'w');
 		flock($file, LOCK_EX);
 		ftruncate($file, 0);
 		fwrite($file, $data);
