@@ -132,7 +132,7 @@ final class Mysql {
 
 	public function checkValues($value_array) {
 		foreach ($value_array as $key => $value) {
-			$value_array[$key] = htmlentities($value_array[$key], ENT_QUOTES, 'UTF-8');
+			$value_array[$key] = htmlentities((string) $value_array[$key], ENT_QUOTES, 'UTF-8');
 			$value_array[$key] = $this -> conn -> real_escape_string($value_array[$key]);
 			$value_array[$key] = ($value_array[$key] == "") ? "NULL" : "'$value_array[$key]'";
 		}

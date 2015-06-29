@@ -32,18 +32,21 @@ final class Route {
 	}
 
 	private function querytToArray() {
-		parse_str($_SERVER['QUERY_STRING'], $url_query);
-		$this -> processUrlArray($url_query);
+		if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING']!='') {
+			parse_str($_SERVER['QUERY_STRING'], $url_query);
+			$this -> processUrlArray($url_query);
+		}
 	}
 
 	private function pathinfoToArray() {
-		$url_pathinfo_exploded = explode('/', $_SERVER['PATH_INFO']);
-		array_shift($url_pathinfo_exploded);
-		foreach ($url_pathinfo_exploded as $key => $value) {
-			if (!($key%2))
-				$url_pathinfo[$value] = $url_pathinfo_exploded[$key+1];
+		if (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO']!='') {
+			$url_pathinfo_exploded = explode('/', $_SERVER['PATH_INFO']);
+			array_shift($url_pathinfo_exploded);
+			foreach ($url_pathinfo_exploded as $key => $value)
+				if (!($key%2) && $value!='')
+					$url_pathinfo[$value] = $url_pathinfo_exploded[$key+1];
+			$this -> processUrlArray($url_pathinfo);
 		}
-		$this -> processUrlArray($url_pathinfo);
 	}
 
 	private function processUrlArray($url_process) {

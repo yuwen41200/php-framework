@@ -9,7 +9,7 @@ abstract class Controller {
 	final protected function model($model) {
 		if (empty($model))
 			return NULL;
-		$model .= 'Model';
+		$model = ucfirst($model).'Model';
 		return new $model;
 	}
 
@@ -31,6 +31,8 @@ abstract class Controller {
 		$template -> init($path, $data);
 		$template -> output();
 	}
+
+	abstract public function index();
 
 }
 

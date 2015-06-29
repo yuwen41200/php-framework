@@ -1,6 +1,6 @@
 # PHP Framework #
 Basic PHP MVC Framework  
-[http://people.cs.nctu.edu.tw/~ywpu/php-framework/][link]
+[http://people.cs.nctu.edu.tw/~ywpu/framework/][link]
 
 ## Instructions ##
 The following files are just usage examples  
@@ -15,4 +15,4 @@ model/*
 view/*
 ```
 
-[link]: http://people.cs.nctu.edu.tw/~ywpu/php-framework/
+[link]: http://people.cs.nctu.edu.tw/~ywpu/framework/

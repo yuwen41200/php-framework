@@ -52,7 +52,7 @@ SYNTAX
 		$params = $this -> db -> checkValues($params);
 		$value = $params['content'];
 		$this -> db -> insert($table_name, $column, $value);
-		header("Refresh: 5; url=http://people.cs.nctu.edu.tw/~ywpu/php-framework/index/ctl/Database");
+		header("Refresh: 5; url=http://people.cs.nctu.edu.tw/~ywpu/framework/index/ctl/database");
 		echo "Debug message: row inserted successfully<br>\n";
 		exit;
 	}

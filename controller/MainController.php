@@ -3,20 +3,20 @@
 class MainController extends Controller {
 
 	public function index() {
-		echo "Debug message: action 'index' in controller 'Main'<br>\n";
+		echo "Debug message: action 'index' in controller 'main'<br>\n";
 		echo "Info: try other available actions 'testDatabases', 'testSample', 'testHome'<br>\n";
-		echo "Info: or try other available controllers 'Database', 'Main' in app 'simple_cache'<br>\n";
+		echo "Info: or try other available controllers 'database', 'main' in app 'simple_cache'<br>\n";
 	}
 
 	public function testDatabases() {
-		$mod = $this -> model('Main');
+		$mod = $this -> model('main');
 		$mod -> testing();
 		$mod -> show();
 	}
 
 	public function testSample() {
-		$obj = $this -> lib('sample', FALSE);
-		$obj -> sampleRun();
+		$lib = $this -> lib('sample', FALSE);
+		$lib -> sampleRun();
 	}
 
 	public function testHome() {

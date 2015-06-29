@@ -11,7 +11,6 @@ define('_LOG_PATH', _ROOT_PATH.'/log');
 define('_SYS_CORE_PATH', _SYS_PATH.'/core');
 define('_SYS_LIB_PATH', _SYS_PATH.'/lib');
 define('_USE_CONFIG_FILE', _CONFIG_PATH.'/default.php');
-define('_APP_VERSION', 'v2.0');
 
 final class Application {
 
@@ -20,21 +19,25 @@ final class Application {
 
 	public static function init() {
 		self::$_config = require_once _USE_CONFIG_FILE;
+		if (empty(self::$_config['web_root']))
+			self::$_config['web_root'] = dirname($_SERVER['SCRIPT_NAME']);
 		self::$_lib = array(
-			'cache' => _SYS_LIB_PATH.'/lib_cache.php',
-			'mysql'=> _SYS_LIB_PATH.'/lib_mysql.php',
-			'route' => _SYS_LIB_PATH.'/lib_route.php',
-			'template' => _SYS_LIB_PATH.'/lib_template.php'
+			'cache' => _SYS_LIB_PATH.'/Cache.php',
+			'mysql'=> _SYS_LIB_PATH.'/Mysql.php',
+			'route' => _SYS_LIB_PATH.'/Route.php',
+			'template' => _SYS_LIB_PATH.'/Template.php'
 		);
-		require_once _SYS_CORE_PATH.'/model.php';
-		require_once _SYS_CORE_PATH.'/controller.php';
+		require_once _SYS_CORE_PATH.'/Model.php';
+		require_once _SYS_CORE_PATH.'/Controller.php';
+		if (version_compare(PHP_VERSION, '5.5.0', '<'))
+			require_once dirname(__FILE__).'/pwdfunc.php';
 	}
 
 	public static function load() {
 		foreach (self::$_lib as $key => $value) {
-			require_once self::$_lib[$key];
-			$u_key = ucfirst($key);
-			self::$_lib[$key] = new $u_key;
+			require_once $value;
+			$uc_key = ucfirst($key);
+			self::$_lib[$key] = new $uc_key;
 		}
 		if (is_object(self::$_lib['cache'])) {
 			self::$_lib['cache'] -> init(
@@ -55,13 +58,14 @@ final class Application {
 		if (isset($url_array['app']))
 			$app = $url_array['app'];
 		if (isset($url_array['ctl']))
-			$controller = $model = $url_array['ctl'];
+			$controller = $model = ucfirst($url_array['ctl']);
 		else
-			$controller = $model = self::$_config['route_default_controller'];
+			$controller = $model = ucfirst(self::$_config['route_default_controller']);
 		if ($app) {
 			$controller_file = _CONTROLLER_PATH.'/'.$app.'/'.$controller.'Controller.php';
 			$model_file = _MODEL_PATH.'/'.$app.'/'.$model.'Model.php';
-		} else {
+		}
+		else {
 			$controller_file = _CONTROLLER_PATH.'/'.$controller.'Controller.php';
 			$model_file = _MODEL_PATH.'/'.$model.'Model.php';
 		}
@@ -91,16 +95,18 @@ final class Application {
 	}
 
 	public static function loadCustomLib($load_class) {
-		$lib_file = _LIB_PATH.'/'.self::$_config['lib_prefix'].'_'.$load_class.'.php';
+		$uc_lib_prefix = ucfirst(self::$_config['lib_prefix']);
+		$uc_load_class = ucfirst($load_class);
+		$lib_file = _LIB_PATH.'/'.$uc_lib_prefix.$uc_load_class.'.php';
 		if (file_exists($lib_file)) {
 			require_once $lib_file;
-			$load_class = ucfirst(self::$_config['lib_prefix']).ucfirst($load_class);
+			$load_class = $uc_lib_prefix.$uc_load_class;
 			return new $load_class;
-		} else {
-			$lib_file = _SYS_LIB_PATH.'/lib_'.$load_class.'.php';
+		}
+		else {
+			$lib_file = _SYS_LIB_PATH.'/'.$uc_load_class.'.php';
 			require_once $lib_file;
-			$u_load_class = ucfirst($load_class);
-			return self::$_lib[$load_class] = new $u_load_class;
+			return self::$_lib[$load_class] = new $uc_load_class;
 		}
 	}
 
