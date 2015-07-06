@@ -32,8 +32,6 @@ abstract class Controller {
 		$template -> output();
 	}
 
-	abstract public function index();
-
 }
 
 ?>

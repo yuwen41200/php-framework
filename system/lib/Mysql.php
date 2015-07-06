@@ -127,7 +127,8 @@ final class Mysql {
 	}
 
 	public function query($query) {
-		$this -> conn -> query($query) or die('MySQL Error: '.$this -> conn -> error);
+		$result = $this -> conn -> query($query) or die('MySQL Error: '.$this -> conn -> error);
+		return $result;
 	}
 
 	public function checkValues($value_array) {
