@@ -16,8 +16,7 @@ view/*
 ```
 
 ## Notice ##
-This work is based on [yuansir/tiny-php-framework][src-link]  
-by yuansir &lt;yuansir@live.cn/yuansir-web.com&gt;.  
+This work is based on [yuansir/tiny-php-framework][src-link] by yuansir &lt;yuansir@live.cn&gt;.  
 For more information, visit [http://www.yuansir-web.com/][ext-link].
 
 [demo-link]: http://people.cs.nctu.edu.tw/~ywpu/framework/
